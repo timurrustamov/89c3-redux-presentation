@@ -66,8 +66,14 @@ class Root extends React.Component<ComponentProps, ComponentState> {
         }}>
         <Swipeable
           onClick={this.onClick}
-          onSwipedLeft={this.onNext}
-          onSwipedRight={this.onPrevious}
+          onSwipedLeft={(e, delta, flick) => {
+            if (flick)
+              this.onNext()
+          }}
+          onSwipedRight={(e, delta, flick) => {
+            if (flick)
+              this.onPrevious()
+          }}
         >
           <Wrapper>{React.Children.map(this.props.children, (child) => {            
             if (React.isValidElement(child) && child.type[0] !== 'h' && child.type !== 'div') {

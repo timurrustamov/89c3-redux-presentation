@@ -14,7 +14,7 @@ const FeaturesAnimated = (props: ComponentProps) => {
     style = { color: '#999999', textDecoration: 'line-through' }
   return (
     <h4 style={style}>
-      Features et APIs ?
+      Features & APIs ?
     </h4>
   )
 }

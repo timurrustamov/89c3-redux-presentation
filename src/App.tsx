@@ -11,6 +11,7 @@ import ReduxImplementation from './components/ReduxImplementation'
 import FeaturesAnimated from './components/FeaturesAnimated'
 import Reducer from './components/Reducer'
 import Action from './components/Action'
+import TreeView from './components/TreeView'
 
 import store from './store'
 
@@ -30,6 +31,9 @@ class App extends React.Component {
           <ReduxImplementation />
           <FeaturesAnimated steps={2} />
           <BackgroundColor fontColor="#ffffff" backgroundColor="#222220">
+            <h4>Constraints & Contracts</h4>
+          </BackgroundColor>          
+          <BackgroundColor fontColor="#ffffff" backgroundColor="#222220">
             <List
               title="Redux Contraints"
               points={[
@@ -38,6 +42,9 @@ class App extends React.Component {
                 'Reducers Appliquent les Changements'
               ]}
             />
+          </BackgroundColor>
+          <BackgroundColor>
+            <TreeView />
           </BackgroundColor>
           <BackgroundColor fontColor="#ffffff" backgroundColor="#222220">
             <List
