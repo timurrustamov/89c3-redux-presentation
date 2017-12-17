@@ -14,14 +14,14 @@ export default (props: ComponentProps) => (
         xs={12}
         sm={10}
         md={8}
-        lg={6}
-        xl={4}
+        lg={8}
+        xl={6}
         smOffset={1}
         mdOffset={2}
-        lgOffset={3}
-        xlOffset={4}
+        lgOffset={2}
+        xlOffset={3}
       >
-        <ul style={{ fontSize: '1.5rem', fontWeight: 400 }}>
+        <ul style={{ fontSize: '1.3rem', fontWeight: 400 }}>
           {props.points.map((point, index) => (
             <li key={index}>{point}</li>
           ))}

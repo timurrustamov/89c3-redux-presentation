@@ -1,14 +1,16 @@
 import * as React from 'react'
 import { Provider } from 'react-redux'
 
+import List from './components/List'
+import BackgroundColor from './components/BackgroundColor'
+
 import Root from './components/Root'
 import Welcome from './components/Welcome'
 import Evolution from './components/Evolution'
 import ReduxImplementation from './components/ReduxImplementation'
 import FeaturesAnimated from './components/FeaturesAnimated'
-
-import List from './components/List'
-import BackgroundColor from './components/BackgroundColor'
+import Reducer from './components/Reducer'
+import Action from './components/Action'
 
 import store from './store'
 
@@ -31,11 +33,56 @@ class App extends React.Component {
             <List
               title="Redux Contraints"
               points={[
-                'Single State Tree',
-                'Actions Describe Updates',
-                'Reducers Apply Updates'
+                'State Unique',
+                'Actions Décrivent les Changements',
+                'Reducers Appliquent les Changements'
               ]}
             />
+          </BackgroundColor>
+          <BackgroundColor fontColor="#ffffff" backgroundColor="#222220">
+            <List
+              title="Debug Workflow"
+              points={[
+                'Log des Actions et du State',
+                'Trouver le State Défaillant',
+                'Verifier l\'Action',
+                'Patcher le Reducer',
+                'Ecrire un Test'
+              ]}
+            />
+          </BackgroundColor>
+          <BackgroundColor fontColor="#ffffff" backgroundColor="#222220">
+            <List
+              title="Redux Contract"
+              points={[
+                'Reducers',
+                'Actions',
+                'Selectors',
+                'Middleware',
+                'Enhancers'
+              ]}
+            />
+          </BackgroundColor>
+          <BackgroundColor fontColor="#ffffff" backgroundColor="#222220">
+            <h4>Reducers</h4>
+            <h5 style={{color: '#aaaaaa', fontWeight: 200}}>
+              {`(state: State, action: Action) => State`}
+            </h5>
+          </BackgroundColor>
+          <BackgroundColor fontColor="#ffffff" backgroundColor="#222220">
+            <Reducer />
+          </BackgroundColor>
+          <BackgroundColor fontColor="#ffffff" backgroundColor="#222220">
+            <h4>Actions</h4>
+            <h5 style={{color: '#aaaaaa', fontWeight: 200}}>
+              {`type Action<T> = {
+                type: string,
+                payload: T
+              }`}
+            </h5>
+          </BackgroundColor>
+          <BackgroundColor fontColor="#ffffff" backgroundColor="#222220">
+            <Action />
           </BackgroundColor>
         </Root>
       </Provider>

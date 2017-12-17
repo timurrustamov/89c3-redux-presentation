@@ -16,6 +16,12 @@ body {
   font-size: 1rem;
 }
 
+@keyframes spin {
+  100% {
+    transform: rotate(360deg)
+  }
+}
+
 #background {
   transition: background-color 0.5s ease;
 }

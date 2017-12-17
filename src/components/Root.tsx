@@ -62,7 +62,7 @@ class Root extends React.Component<ComponentProps, ComponentState> {
       <div style={{
           backgroundColor: this.props.backgroundColor,
           color: this.props.fontColor,
-          transition: 'background-color 0.5s ease, color 0.5 ease'
+          transition: 'background-color 0.5s ease, color 0.5s ease'
         }}>
         <Swipeable
           onClick={this.onClick}

@@ -9,16 +9,9 @@ export type ComponentProps = {
 
 const FeaturesAnimated = (props: ComponentProps) => {
   
-  let style: React.CSSProperties = {
-    transition: 'color 0.7s ease-in-out, textDecoration 1s ease'
-  }
-  if (props.step) {
-    style = {
-      ...style,
-      textDecoration: 'line-through',
-      color: '#999999'
-    }
-  }
+  let style: React.CSSProperties = {};
+  if (props.step)
+    style = { color: '#999999', textDecoration: 'line-through' }
   return (
     <h4 style={style}>
       Features et APIs ?

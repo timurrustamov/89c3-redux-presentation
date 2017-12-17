@@ -65,14 +65,16 @@ export class Welcome extends React.Component<ComponentProps, ComponentState> {
 
   render() {
 
-    let style = {
+    let style: React.CSSProperties = {
       width: '11rem',
       height: 'auto'
     };
     if (this.props.step > 0) {
       style = {
         width: '18rem',
-        height: 'auto'
+        height: 'auto',
+        animation: 'spin 30s infinite ease-in-out',
+        transformOrigin: '9.5rem'
       }
     }
     return (
@@ -80,8 +82,7 @@ export class Welcome extends React.Component<ComponentProps, ComponentState> {
         <img
           style={{
             ...style,
-            transition: 'width 0.5s, height 0.5s ease',
-            
+            transition: 'width 0.5s, height 0.5s ease'
           }}
           src="./images/redux-logo.png"
           alt="[Here once was a redux logo]"

@@ -19,7 +19,7 @@ const code = `
 
   // Redux implementation goes here:
 
-  let listeners: Function[] = [];
+  let listeners: Function[] = []
   let state = undefined 
 
   function dispatch<T>(action: T): T {
