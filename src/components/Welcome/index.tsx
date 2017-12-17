@@ -87,7 +87,7 @@ export class Welcome extends React.Component<ComponentProps, ComponentState> {
             transition: 'width 0.5s, height 0.5s ease',
             
           }}
-          src="images/redux-logo.png"
+          src="./images/redux-logo.png"
           alt="[Here once was a redux logo]"
         />
         {this.props.step === 0 && (<h1
