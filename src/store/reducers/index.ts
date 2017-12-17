@@ -17,6 +17,7 @@ function navigation(
         return {
           ...state,
           step: 0,
+          totalSteps: 0,
           page: state.page + 1 >= state.totalPages ? 0 : state.page + 1
         }
       return {
@@ -29,6 +30,7 @@ function navigation(
         return {
           ...state,
           step: 0,
+          totalSteps: 0,
           page: state.page - 1 < 0 ? 0 : state.page - 1
         }
       return {

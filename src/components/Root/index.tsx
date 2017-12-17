@@ -14,7 +14,8 @@ import { bindActionCreators } from 'redux'
 export type ComponentProps = {
   [P in keyof typeof Actions]: (typeof Actions)[P]
 } & {
-  backgroundColor: string
+  backgroundColor: string,
+  defaultBackgroundColor?: string
 }
 
 export type ComponentState = {
@@ -67,7 +68,15 @@ class Root extends React.Component<ComponentProps, ComponentState> {
           onSwipedLeft={this.onNext}
           onSwipedRight={this.onPrevious}
         >
-          <Wrapper>{this.props.children}</Wrapper>
+          <Wrapper>{React.Children.map(this.props.children, (child) => {            
+            if (React.isValidElement(child) && child.type[0] !== 'h' && child.type !== 'div') {
+              return React.cloneElement(child, {
+                backgroundColor: this.props.defaultBackgroundColor,
+                ...child.props
+              } as {})
+            }
+            return child
+          })}</Wrapper>
         </Swipeable>
       </div>
     )

@@ -5,14 +5,15 @@ import { Component } from 'react'
 import * as Actions from '../../store/actions'
 import { bindActionCreators } from 'redux'
 import { State } from '../../store/index'
+import { StepProps } from '../Step';
 
 const labels = ['89C3', 'BPCE', 'Redux']
 
 export type ComponentProps = {
   [P in keyof typeof Actions]: (typeof Actions)[P]
 } & {
-  step: number
-}
+  step: number 
+} & StepProps
 
 export type ComponentState = {
   opacity: number
@@ -32,13 +33,8 @@ export class Welcome extends React.Component<ComponentProps, ComponentState> {
     return this.state.opacity > 1 ? 1 : this.state.opacity
   }
 
-  componentWillReceiveProps(props: ComponentProps) {
-    console.log(props)
-  }
-
   componentWillMount() {
     this.props.StepsTotal({ totalSteps: 2 })
-    this.props.SetBackground({ backgroundColor: '#E7EAE3' })
   }
 
   componentDidMount() {
@@ -71,12 +67,12 @@ export class Welcome extends React.Component<ComponentProps, ComponentState> {
 
     let style = {
       width: '11rem',
-      height: '10rem'
+      height: 'auto'
     };
     if (this.props.step > 0) {
       style = {
         width: '18rem',
-        height: '16rem'
+        height: 'auto'
       }
     }
     return (
@@ -104,8 +100,8 @@ export class Welcome extends React.Component<ComponentProps, ComponentState> {
             fontSize: '0.7em',
             color: '#7453aa',
             position: 'absolute',
-            bottom: '3vh',
-            right: '3vw'
+            bottom: '1rem',
+            right: '1rem'
           }}
         >
           Timur Rustamov

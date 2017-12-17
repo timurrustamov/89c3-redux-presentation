@@ -20,6 +20,8 @@ import { State } from '../../store/index';
 import { Dispatch, connect } from 'react-redux';
 import { Action } from 'redux';
 
+import { StepProps } from '../Step'
+
 import * as Actions from '../../store/actions'
 import { bindActionCreators } from 'redux';
 
@@ -51,8 +53,8 @@ const dataAll: ChartData[] = [
 export type ComponentProps = {
   [P in keyof typeof Actions]: (typeof Actions)[P]
 } & {
-  step: number  
-}
+  step: number
+} & StepProps
 
 export interface ComponentState {
   height: number

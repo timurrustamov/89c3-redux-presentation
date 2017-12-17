@@ -27,9 +27,19 @@ export class Wrapper extends React.Component<ComponentProps> {
   }
 
   componentWillReceiveProps(props: ComponentProps) {
-    this.props.PagesTotal({
-      totalPages: React.Children.count(this.props.children)
-    })
+    
+    if (props.totalPages !== React.Children.count(this.props.children))
+      this.props.PagesTotal({
+        totalPages: React.Children.count(this.props.children)
+      })
+    if (this.props.children) {
+      const child = this.props.children[props.page] || undefined
+      if (child && React.isValidElement(child)) {
+        const { backgroundColor } = child.props as { backgroundColor?: string };
+        if (backgroundColor)
+          this.props.SetBackground({ backgroundColor })
+      }
+    }
   }
 
   render() {

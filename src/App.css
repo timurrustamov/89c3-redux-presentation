@@ -33,3 +33,15 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+h4 {
+  transition: color 0.5s linear;
+}
+
+@media (max-width: 1024px) {
+  code {
+    display: inline-block;
+    word-break: break-all;
+    white-space: pre-line
+  }
+}
