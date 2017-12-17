@@ -54,7 +54,8 @@ function navigation(
 
 function colorScheme(
   state: State['colorScheme'] = {
-    backgroundColor: 'white' 
+    backgroundColor: 'white',
+    fontColor: '#444444'
   },
   action: Actions.Any
 ): State['colorScheme'] {
@@ -63,6 +64,11 @@ function colorScheme(
       return {
         ...state,
         backgroundColor: action.payload.backgroundColor
+      }
+    case 'COLOR_SCHEME_SET_FONT_COLOR':
+      return {
+        ...state,
+        fontColor: action.payload.fontColor
       }
     default:
       return state

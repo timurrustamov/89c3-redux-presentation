@@ -16,13 +16,13 @@ import {
 import 'react-virtualized/styles.css'
 import { Dimensions } from 'react-virtualized/dist/es/AutoSizer'
 import { Col, Row } from 'react-flexbox-grid'
-import { State } from '../../store/index';
+import { State } from '../store/index';
 import { Dispatch, connect } from 'react-redux';
 import { Action } from 'redux';
 
-import { StepProps } from '../Step'
+import { StepProps } from './Step'
 
-import * as Actions from '../../store/actions'
+import * as Actions from '../store/actions'
 import { bindActionCreators } from 'redux';
 
 interface ChartData {

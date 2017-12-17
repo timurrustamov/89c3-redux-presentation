@@ -1,3 +1,5 @@
 export interface StepProps {
-  backgroundColor?: string
+  backgroundColor?: string,
+  fontColor?: string,
+  steps?: number
 }

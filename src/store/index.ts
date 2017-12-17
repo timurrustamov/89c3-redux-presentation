@@ -14,7 +14,8 @@ export class State {
     totalSteps: 1
   }
   readonly colorScheme = {
-    backgroundColor: '#E7EAE3'
+    backgroundColor: '#E7EAE3',
+    fontColor: '#444444'
   }
 }
 const Store = createStore(

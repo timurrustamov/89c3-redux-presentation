@@ -47,9 +47,18 @@ export const SetBackground = createAction<SetBackground>(
   'COLOR_SCHEME_SET_BACKGROUND'
 )
 
+export interface SetFontColor extends Action {
+  type: 'COLOR_SCHEME_SET_FONT_COLOR',
+  payload: {
+    fontColor: string
+  }
+}
+export const SetFontColor = createAction<SetFontColor>('COLOR_SCHEME_SET_FONT_COLOR')
+
 export type Any =
   | PagesTotal
   | StepsTotal
   | Next
   | Previous
   | SetBackground
+  | SetFontColor

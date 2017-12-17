@@ -2,10 +2,10 @@ import * as React from 'react'
 import { Action } from 'redux'
 import { connect, Dispatch } from 'react-redux'
 import { Component } from 'react'
-import * as Actions from '../../store/actions'
+import * as Actions from '../store/actions'
 import { bindActionCreators } from 'redux'
-import { State } from '../../store/index'
-import { StepProps } from '../Step';
+import { State } from '../store/index'
+import { StepProps } from './Step';
 
 const labels = ['89C3', 'BPCE', 'Redux']
 

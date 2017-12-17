@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import * as Actions from '../../store/actions'
+import * as Actions from '../store/actions'
 
-import { State } from '../../store'
+import { State } from '../store'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 
 import { tomorrowNight } from 'react-syntax-highlighter/dist/styles/hljs'

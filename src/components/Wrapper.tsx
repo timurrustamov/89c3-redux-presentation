@@ -2,12 +2,13 @@ import * as React from 'react'
 import { CSSProperties, ReactChildren, ReactChild } from 'react'
 import { Row, Col, Grid } from 'react-flexbox-grid'
 
-import Welcome from '../Welcome'
-import { State } from '../../store/index';
+import Welcome from './Welcome'
+import { State } from '../store/index';
 import { connect, Dispatch } from 'react-redux';
-import * as Actions from '../../store/actions';
+import * as Actions from '../store/actions';
 import { bindActionCreators } from 'redux';
 import { Action } from 'redux';
+import { StepProps } from './Step';
 
 export type ComponentProps = {
   [P in keyof typeof Actions]: (typeof Actions)[P]
@@ -35,9 +36,13 @@ export class Wrapper extends React.Component<ComponentProps> {
     if (this.props.children) {
       const child = this.props.children[props.page] || undefined
       if (child && React.isValidElement(child)) {
-        const { backgroundColor } = child.props as { backgroundColor?: string };
+        const { backgroundColor, steps, fontColor } = child.props as StepProps;
         if (backgroundColor)
           this.props.SetBackground({ backgroundColor })
+        if (steps)
+          this.props.StepsTotal({ totalSteps: steps })
+        if (fontColor)
+          this.props.SetFontColor({ fontColor })
       }
     }
   }

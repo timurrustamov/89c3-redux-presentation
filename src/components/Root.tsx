@@ -3,19 +3,19 @@ import { CSSProperties, MouseEvent } from 'react'
 import { connect, Dispatch } from 'react-redux'
 import * as Swipeable from 'react-swipeable'
 
-import * as Actions from '../../store/actions'
+import * as Actions from '../store/actions'
 
-import Wrapper from '../Wrapper'
-import Welcome from '../Welcome'
-import { State } from '../../store/index'
+import Wrapper from './Wrapper'
+import Welcome from './Welcome'
+import { State } from '../store/index'
 import { Action } from 'redux'
 import { bindActionCreators } from 'redux'
 
 export type ComponentProps = {
   [P in keyof typeof Actions]: (typeof Actions)[P]
-} & {
-  backgroundColor: string,
-  defaultBackgroundColor?: string
+} & State['colorScheme'] & {
+  defaultBackgroundColor?: string,
+  defaultFontColor?: string
 }
 
 export type ComponentState = {
@@ -61,7 +61,8 @@ class Root extends React.Component<ComponentProps, ComponentState> {
     return (
       <div style={{
           backgroundColor: this.props.backgroundColor,
-          transition: 'background-color 0.5s ease'
+          color: this.props.fontColor,
+          transition: 'background-color 0.5s ease, color 0.5 ease'
         }}>
         <Swipeable
           onClick={this.onClick}
@@ -72,6 +73,7 @@ class Root extends React.Component<ComponentProps, ComponentState> {
             if (React.isValidElement(child) && child.type[0] !== 'h' && child.type !== 'div') {
               return React.cloneElement(child, {
                 backgroundColor: this.props.defaultBackgroundColor,
+                fontColor: this.props.defaultFontColor,
                 ...child.props
               } as {})
             }
