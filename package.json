@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://timurrustamov.github.io/89c3-redux-presentation",
   "dependencies": {
+    "gh-pages": "^1.1.0",
     "react": "^16.2.0",
     "react-d3-tree": "^1.7.0",
     "react-dom": "^16.2.0",
@@ -20,6 +21,8 @@
     "tslint": "^5.8.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
