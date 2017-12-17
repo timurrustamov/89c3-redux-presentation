@@ -41,36 +41,15 @@ class App extends React.Component {
           </BackgroundColor>
           <BackgroundColor fontColor="#ffffff" backgroundColor="#222220">
             <List
-              title="Debug Workflow"
-              points={[
-                'Log des Actions et du State',
-                'Trouver le State Défaillant',
-                'Verifier l\'Action',
-                'Patcher le Reducer',
-                'Ecrire un Test'
-              ]}
-            />
-          </BackgroundColor>
-          <BackgroundColor fontColor="#ffffff" backgroundColor="#222220">
-            <List
               title="Redux Contract"
               points={[
-                'Reducers',
                 'Actions',
+                'Reducers',
                 'Selectors',
                 'Middleware',
                 'Enhancers'
               ]}
             />
-          </BackgroundColor>
-          <BackgroundColor fontColor="#ffffff" backgroundColor="#222220">
-            <h4>Reducers</h4>
-            <h5 style={{color: '#aaaaaa', fontWeight: 200}}>
-              {`(state: State, action: Action) => State`}
-            </h5>
-          </BackgroundColor>
-          <BackgroundColor fontColor="#ffffff" backgroundColor="#222220">
-            <Reducer />
           </BackgroundColor>
           <BackgroundColor fontColor="#ffffff" backgroundColor="#222220">
             <h4>Actions</h4>
@@ -83,6 +62,27 @@ class App extends React.Component {
           </BackgroundColor>
           <BackgroundColor fontColor="#ffffff" backgroundColor="#222220">
             <Action />
+          </BackgroundColor>
+          <BackgroundColor fontColor="#ffffff" backgroundColor="#222220">
+            <h4>Reducers</h4>
+            <h5 style={{color: '#aaaaaa', fontWeight: 200}}>
+              {`(state: State, action: Action) => State`}
+            </h5>
+          </BackgroundColor>
+          <BackgroundColor fontColor="#ffffff" backgroundColor="#222220">
+            <Reducer />
+          </BackgroundColor>
+          <BackgroundColor fontColor="#ffffff" backgroundColor="#222220">
+            <List
+              title="Debug Workflow"
+              points={[
+                'Log des Actions et du State',
+                'Trouver le State Défaillant',
+                'Verifier l\'Action',
+                'Patcher le Reducer',
+                'Ecrire un Test'
+              ]}
+            />
           </BackgroundColor>
         </Root>
       </Provider>
