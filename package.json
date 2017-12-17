@@ -2,6 +2,7 @@
   "name": "89c3-redux-presentation",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://timurrustamov.github.io/89c3-redux-presentation",
   "dependencies": {
     "react": "^16.2.0",
     "react-d3-tree": "^1.7.0",
