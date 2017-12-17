@@ -1,0 +1,21 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.grid-container {
+  height: 100vh;
+  font-family: 'Ubuntu', sans-serif;
+  color: '#444444';
+  font-size: 2.5rem;
+}
+.grid { position: absolute; top: 0; bottom: 0; left: 0; right: 0}
+
+.recharts-wrapper {
+  font-size: 1rem;
+}
+
+#background {
+  transition: background-color 0.5s ease;
+}
