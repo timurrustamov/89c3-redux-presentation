@@ -53,6 +53,7 @@ export class Code extends React.Component<ComponentProps, {}> {
             lineStyle={this.lineStyle}
             style={tomorrowNight}
             customStyle={{
+              width: '100%',
               opacity: 0.01,
               textAlign: 'left',
               animation: 'fadein 0.5s ease 0.5s forwards'
