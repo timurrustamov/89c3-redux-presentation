@@ -1,45 +1,59 @@
-import * as React from 'react'
-import { CSSProperties, MouseEvent } from 'react'
-import { connect, Dispatch } from 'react-redux'
-import * as Swipeable from 'react-swipeable'
+import * as React from 'react';
+import Media from 'react-media'
+import { connect } from 'react-redux';
+import * as Swipeable from 'react-swipeable';
+import * as Radium from 'radium'
 
-import * as Actions from '../store/actions'
+import { State } from '../store/index';
 
-import Wrapper from './Wrapper'
-import Welcome from './Welcome'
-import { State } from '../store/index'
-import { Action } from 'redux'
-import { bindActionCreators } from 'redux'
+import Welcome from './Welcome';
+import Wrapper from './Wrapper';
+import { ConnectedActions, mapDispatchToProps } from '../store/actions/connected-actions';
 
-export type ComponentProps = {
-  [P in keyof typeof Actions]: (typeof Actions)[P]
-} & State['colorScheme'] & {
+export type ComponentProps = ConnectedActions & State['colorScheme'] & {
   defaultBackgroundColor?: string,
   defaultFontColor?: string
 }
-
 export type ComponentState = {
   keyPressed: boolean
 }
 
 class Root extends React.Component<ComponentProps, ComponentState> {
+
   state: ComponentState = {
     keyPressed: false
   }
 
+  private get styles() {
+    return {
+      wrapper: {
+        height: '100%',
+        backgroundColor: this.props.backgroundColor,
+        color: this.props.fontColor,
+        transition: 'background-color 0.5s ease 0.5s forward, color 0.5s ease 0.5s forward'
+      }
+    }
+  }
+
+  private onNext = () => this.props.Next()
+  private onPrevious = () => this.props.Previous()
+
   private onKeyDown = (e: KeyboardEvent) => {
+
     e.preventDefault()
     e.stopPropagation()
-    if (this.state.keyPressed) return false
-    if (e.keyCode === 39 || e.keyCode === 32) this.onNext()
-    if (e.keyCode === 37) this.onPrevious()
+    if (this.state.keyPressed)
+      return false
+    if (e.keyCode === 39 || e.keyCode === 32)
+      this.onNext()
+    if (e.keyCode === 37)
+      this.onPrevious()
     this.setState(state => ({ ...state, keyPressed: true }))
     return true
   }
-  private onKeyUp = () => {
-    this.setState(state => ({ ...state, keyPressed: false }))
-  }
-  private onClick = (e: MouseEvent<HTMLDivElement>) => {
+  private onKeyUp = () => this.setState(state => ({ ...state, keyPressed: false }))
+  private onClick = (e: React.MouseEvent<HTMLDivElement>) => {
+
     e.preventDefault()
     e.stopPropagation()
     this.onNext()
@@ -50,51 +64,43 @@ class Root extends React.Component<ComponentProps, ComponentState> {
     window.addEventListener('keyup', this.onKeyUp)
   }
 
-  onNext = () => {
-    this.props.Next()
-  }
-  onPrevious = () => {
-    this.props.Previous()
-  }
-
   render() {
     return (
-      <div style={{
-          backgroundColor: this.props.backgroundColor,
-          color: this.props.fontColor,
-          transition: 'background-color 0.5s ease, color 0.5s ease'
-        }}>
-        <Swipeable
-          onClick={this.onClick}
-          onSwipedLeft={(e, delta, flick) => {
-            if (flick)
-              this.onNext()
-          }}
-          onSwipedRight={(e, delta, flick) => {
-            if (flick)
-              this.onPrevious()
-          }}
-        >
-          <Wrapper>{React.Children.map(this.props.children, (child) => {            
-            if (React.isValidElement(child) && child.type[0] !== 'h' && child.type !== 'div') {
-              return React.cloneElement(child, {
-                backgroundColor: this.props.defaultBackgroundColor,
-                fontColor: this.props.defaultFontColor,
-                ...child.props
-              } as {})
-            }
-            return child
-          })}</Wrapper>
-        </Swipeable>
-      </div>
+      <div style={this.styles.wrapper}>
+        <Media query="(max-width: 599px)">
+          {match => (
+            <Swipeable
+              // tslint:disable-next-line:no-empty
+              onClick={match && this.onClick || (() => {})}
+              onSwipedLeft={(e, delta, flick) => {
+                if (flick)
+                  this.onNext()
+              }}
+              onSwipedRight={(e, delta, flick) => {
+                if (flick)
+                  this.onPrevious()
+              }}
+            >
+              <Wrapper>
+                {React.Children.map(this.props.children, (child) => {
+                  if (React.isValidElement(child)) {
+                    return React.cloneElement(child, {
+                      backgroundcolor: this.props.defaultBackgroundColor,
+                      fontcolor: this.props.defaultFontColor,
+                      ...child.props
+                    } as {})
+                  }
+                  return child
+                })}
+              </Wrapper>
+            </Swipeable>
+          )}
+        </Media>
+      </div >
     )
   }
 }
 
-const mapStateToProps = (state: State) => ({
+export default Radium(connect((state: State) => ({
   ...state.colorScheme
-})
-const mapDispatchToProps = (dispatch: Dispatch<Action>) =>
-  bindActionCreators(Actions, dispatch)
-
-export default connect(mapStateToProps, mapDispatchToProps)(Root)
+}), mapDispatchToProps)(Root))

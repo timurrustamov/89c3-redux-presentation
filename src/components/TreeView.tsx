@@ -1,74 +1,47 @@
 import * as React from 'react'
-import Tree from 'react-d3-tree'
+import * as Radium from 'radium'
+import { connect } from 'react-redux'
 import { ReactElement } from 'react'
 
-const dataOne = [
-  {
-    name: 'Root',
-    children: [
-      {
-        name: 'User',
-        children: [{ name: 'Name' }, { name: 'Phone' }]
+import { State } from '../store/index'
+
+export type ComponentProps = {
+  step: number
+}
+
+export class TreeView extends React.Component<ComponentProps> {
+
+  private get styles() {
+    return {
+      imageOne: this.props.step === 0 ? {
+        width: '100%',
+        margin: 'auto',
+        transition: 'all 0.5s ease'
+      } : {
+        display: 'none'
       },
-      {
-        name: 'Todos',
-        children: [
-          {
-            name: 'Todo One',
-            children: [{ name: 'Text' }, { name: 'Date' }]
-          },
-          {
-            name: 'Todo One',
-            children: [{ name: 'Text' }, { name: 'Date' }]
-          }
-        ]
+      imageTwo: this.props.step === 1 ? {
+        width: '100%',
+        margin: 'auto',
+        transition: 'all 0.5 ease'
+      } : {
+        display: 'none'
       }
-    ]
-  }
-]
-
-export default class TreeView extends React.PureComponent {
-  private treeContainer: HTMLDivElement | null
-
-  state = {
-    translate: {
-      x: 0,
-      y: 0
-    }
-  }
-
-  componentDidMount() {
-    if (this.treeContainer) {
-      const dimensions = this.treeContainer.getBoundingClientRect()
-      this.setState({
-        translate: {
-          x: dimensions.width / 2,
-          y: dimensions.height / 2
-        }
-      })
     }
   }
 
   render() {
+
     return (
       <div>
         <h4>State</h4>
-        <div
-          ref={tc => (this.treeContainer = tc)}
-          style={{
-            fontSize: '1rem',
-            height: '45vh',
-            border: '0.1rem #333333'
-          }}
-        >
-          <Tree
-            translate={this.state.translate}
-            orientation="vertical"
-            nodeSize={{ x: 40, y: 40 }}
-            data={dataOne}
-          />
-        </div>
+        <img style={this.styles.imageOne} src="images/tree-references.png" />
+        <img style={this.styles.imageTwo} src="images/tree-references-2.gif" />
       </div>
     )
   }
 }
+
+export default Radium(connect((state: State) => ({
+  step: state.navigation.step
+}))(TreeView))

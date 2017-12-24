@@ -1,4 +1,14 @@
 import * as React from 'react'
+import { ConnectedActions, mapDispatchToProps } from '../store/actions/connected-actions'
+
+import { Dimensions } from 'react-virtualized/dist/es/AutoSizer'
+import { Col, Row } from 'react-flexbox-grid'
+import { State } from '../store/index';
+import { Dispatch, connect } from 'react-redux';
+import { Action } from 'redux';
+
+import * as Actions from '../store/actions'
+import { bindActionCreators } from 'redux';
 
 import { AutoSizer } from 'react-virtualized'
 import {
@@ -14,16 +24,6 @@ import {
 } from 'recharts'
 
 import 'react-virtualized/styles.css'
-import { Dimensions } from 'react-virtualized/dist/es/AutoSizer'
-import { Col, Row } from 'react-flexbox-grid'
-import { State } from '../store/index';
-import { Dispatch, connect } from 'react-redux';
-import { Action } from 'redux';
-
-import { StepProps } from './Step'
-
-import * as Actions from '../store/actions'
-import { bindActionCreators } from 'redux';
 
 interface ChartData {
   name: string
@@ -54,7 +54,7 @@ export type ComponentProps = {
   [P in keyof typeof Actions]: (typeof Actions)[P]
 } & {
   step: number
-} & StepProps
+}
 
 export interface ComponentState {
   height: number
@@ -62,13 +62,10 @@ export interface ComponentState {
 }
 
 class Evolution extends React.Component<ComponentProps, ComponentState> {
+
   state: ComponentState = {
     height: 300,
     width: 400
-  }
-
-  componentWillMount() {
-    this.props.StepsTotal({ totalSteps: 2})
   }
 
   setDimensions = (dimensions: Dimensions) => {
@@ -104,8 +101,8 @@ class Evolution extends React.Component<ComponentProps, ComponentState> {
             </AutoSizer>
           </div>
         </Col>
-        <Col md={3} mdOffset={9} sm={4} smOffset={8} xs={6} xsOffset={6}>
-          <span style={{ fontSize: '0.4em' }}>
+        <Col sm={4} smOffset={8} xs={6} xsOffset={6}>
+          <span style={{ fontSize: '1.2rem' }}>
             * NPM downloads
           </span>
         </Col>
@@ -114,10 +111,6 @@ class Evolution extends React.Component<ComponentProps, ComponentState> {
   }
 }
 
-const mapStateToProps = (state: State) => ({
+export default connect((state: State) => ({
   step: state.navigation.step
-})
-const mapDispatchToProps = (dispatch: Dispatch<Action>) => (
-  bindActionCreators(Actions, dispatch)
-)
-export default connect(mapStateToProps, mapDispatchToProps)(Evolution)
+}), mapDispatchToProps)(Evolution)

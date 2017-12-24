@@ -8,24 +8,16 @@ export type ComponentProps = {
 
 export default (props: ComponentProps) => (
   <div>
-    <h4 style={{ fontWeight: 700 }}>{props.title}</h4>
+    <h4 style={{ fontWeight: 700, marginBottom: '1em' }}>{props.title}</h4>
     <Row>
       <Col
         xs={12}
         sm={10}
-        md={8}
-        lg={8}
-        xl={6}
         smOffset={1}
-        mdOffset={2}
-        lgOffset={2}
-        xlOffset={3}
       >
-        <ul style={{ fontSize: '1.3rem', fontWeight: 400 }}>
-          {props.points.map((point, index) => (
-            <li key={index}>{point}</li>
-          ))}
-        </ul>
+        {props.points.map((point, index) => (
+          <h5 style={{marginTop: '0.5em', marginBottom: '0.5em', fontSize: '0.5em'}} key={index}>• {point}</h5>
+        ))}
       </Col>
     </Row>
   </div>

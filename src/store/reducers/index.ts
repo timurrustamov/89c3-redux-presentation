@@ -11,6 +11,7 @@ function navigation(
   },
   action: Actions.Any
 ): State['navigation'] {
+  // tslint:disable-next-line:switch-default
   switch (action.type) {
     case 'NAVIGATION_NEXT':
       if (state.step + 1 >= state.totalSteps)
@@ -59,6 +60,7 @@ function colorScheme(
   },
   action: Actions.Any
 ): State['colorScheme'] {
+  // tslint:disable-next-line:switch-default
   switch (action.type) {
     case 'COLOR_SCHEME_SET_BACKGROUND':
       return {

@@ -1,18 +1,14 @@
 import * as React from 'react'
-import { CSSProperties, ReactChildren, ReactChild } from 'react'
+import * as Radium from 'radium'
 import { Row, Col, Grid } from 'react-flexbox-grid'
+import { connect } from 'react-redux';
+import { ConnectedActions, mapDispatchToProps } from '../store/actions/connected-actions'
 
 import Welcome from './Welcome'
 import { State } from '../store/index';
-import { connect, Dispatch } from 'react-redux';
-import * as Actions from '../store/actions';
-import { bindActionCreators } from 'redux';
-import { Action } from 'redux';
-import { StepProps } from './Step';
+import { ComponentProps as StepProps } from './Step';
 
-export type ComponentProps = {
-  [P in keyof typeof Actions]: (typeof Actions)[P]
-} & {
+export type ComponentProps = ConnectedActions & {
   page: number,
   totalPages: number
 }
@@ -28,28 +24,33 @@ export class Wrapper extends React.Component<ComponentProps> {
   }
 
   componentWillReceiveProps(props: ComponentProps) {
-    
+
     if (props.totalPages !== React.Children.count(this.props.children))
       this.props.PagesTotal({
         totalPages: React.Children.count(this.props.children)
       })
     if (this.props.children) {
+
       const child = this.props.children[props.page] || undefined
       if (child && React.isValidElement(child)) {
-        const { backgroundColor, steps, fontColor } = child.props as StepProps;
-        if (backgroundColor)
-          this.props.SetBackground({ backgroundColor })
+        const { backgroundcolor, steps, fontcolor } = child.props as {
+          backgroundcolor?: string,
+          steps?: number,
+          fontcolor?: string
+        };
+        if (backgroundcolor)
+          this.props.SetBackground({ backgroundColor: backgroundcolor })
         if (steps)
           this.props.StepsTotal({ totalSteps: steps })
-        if (fontColor)
-          this.props.SetFontColor({ fontColor })
+        if (fontcolor)
+          this.props.SetFontColor({ fontColor: fontcolor })
       }
     }
   }
 
   render() {
-    
-    const children = React.Children.toArray(this.props.children)  
+
+    const children = React.Children.toArray(this.props.children)
     return (
       <Grid fluid>
         <Row className="grid-container" center="xs" middle="xs">
@@ -66,11 +67,7 @@ export class Wrapper extends React.Component<ComponentProps> {
   }
 }
 
-const mapStateToProps = (state: State) => ({
+export default connect((state: State) => ({
   page: state.navigation.page,
   totalPages: state.navigation.totalPages
-})
-const mapDispatchToProps = (dispatch: Dispatch<Action>) => (
-  bindActionCreators(Actions, dispatch)
-)
-export default connect(mapStateToProps, mapDispatchToProps)(Wrapper)
+}), mapDispatchToProps)(Wrapper)

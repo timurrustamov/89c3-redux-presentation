@@ -1,19 +1,15 @@
 import * as React from 'react'
-import { Action } from 'redux'
-import { connect, Dispatch } from 'react-redux'
-import { Component } from 'react'
-import * as Actions from '../store/actions'
-import { bindActionCreators } from 'redux'
+import * as Radium from 'radium'
+import { connect } from 'react-redux'
+
 import { State } from '../store/index'
-import { StepProps } from './Step';
+import { ConnectedActions, mapDispatchToProps } from '../store/actions/connected-actions'
 
 const labels = ['89C3', 'BPCE', 'Redux']
 
-export type ComponentProps = {
-  [P in keyof typeof Actions]: (typeof Actions)[P]
-} & {
-  step: number 
-} & StepProps
+export type ComponentProps = ConnectedActions & {
+  step: number
+}
 
 export type ComponentState = {
   opacity: number
@@ -22,6 +18,7 @@ export type ComponentState = {
 }
 
 export class Welcome extends React.Component<ComponentProps, ComponentState> {
+
   opacityInterval: number
   state: ComponentState = {
     opacity: 0,
@@ -33,8 +30,31 @@ export class Welcome extends React.Component<ComponentProps, ComponentState> {
     return this.state.opacity > 1 ? 1 : this.state.opacity
   }
 
-  componentWillMount() {
-    this.props.StepsTotal({ totalSteps: 2 })
+  get styles() {
+    return {
+      image: this.props.step > 0 ? {
+        width: '5em',
+        height: 'auto',
+        animation: 'spin 30s infinite ease-in-out',
+        transition: 'width 0.5s ease, height 0.5s ease'
+      } : {
+        width: '3em',
+        height: 'auto',
+        transition: 'width 0.5s ease, height 0.5s ease'
+      },
+      text: {
+        color: '#7453A9',
+        fontSize: '1em',
+        display: this.props.step > 0 ? 'none' : 'block'
+      },
+      signature: {
+        fontSize: '0.5em',
+        color: '#7453aa',
+        position: 'absolute' as 'absolute',
+        bottom: '1rem',
+        right: '1rem'
+      }
+    }
   }
 
   componentDidMount() {
@@ -65,46 +85,19 @@ export class Welcome extends React.Component<ComponentProps, ComponentState> {
 
   render() {
 
-    let style: React.CSSProperties = {
-      width: '11rem',
-      height: 'auto'
-    };
-    if (this.props.step > 0) {
-      style = {
-        width: '18rem',
-        height: 'auto',
-        animation: 'spin 30s infinite ease-in-out',
-        transformOrigin: '9.5rem'
-      }
-    }
     return (
       <div>
         <img
-          style={{
-            ...style,
-            transition: 'width 0.5s, height 0.5s ease'
-          }}
+          style={this.styles.image}
           src="./images/redux-logo.png"
           alt="[Here once was a redux logo]"
         />
-        {this.props.step === 0 && (<h1
-          style={{
-            color: '#7453A9'
-          }}
-        >
+        <h1 style={this.styles.text}>
           <span style={{ opacity: this.opacity }}>
             {labels[this.state.labelIndex]}
           </span>
-        </h1>)}
-        <span
-          style={{
-            fontSize: '0.7em',
-            color: '#7453aa',
-            position: 'absolute',
-            bottom: '1rem',
-            right: '1rem'
-          }}
-        >
+        </h1>
+        <span style={this.styles.signature}>
           Timur Rustamov
         </span>
       </div>
@@ -112,9 +105,6 @@ export class Welcome extends React.Component<ComponentProps, ComponentState> {
   }
 }
 
-const mapStateToProps = (state: State) => ({
+export default connect((state: State) => ({
   step: state.navigation.step
-})
-const mapDispatchToProps = (dispatch: Dispatch<Action>) =>
-  bindActionCreators({ ...Actions }, dispatch)
-export default connect(mapStateToProps, mapDispatchToProps)(Welcome)
+}), mapDispatchToProps)(Welcome)

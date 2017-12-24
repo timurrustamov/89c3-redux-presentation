@@ -5,21 +5,41 @@ body {
 }
 
 .grid-container {
-  height: 100vh;
+  min-height: 100vh;
   font-family: 'Ubuntu', sans-serif;
-  color: '#444444';
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
+
 .grid { position: absolute; top: 0; bottom: 0; left: 0; right: 0}
 
 .recharts-wrapper {
   font-size: 1rem;
 }
 
+@media (min-width:576px) {
+  .grid-container {
+    font-size: 2.5rem
+  }
+}
+@media (min-width:768px) {
+  .grid-container {
+    font-size: 3.5rem
+  }
+}
+@media (min-width:992px) {
+  .grid-container {
+    font-size: 4rem
+  }
+}
+
 @keyframes spin {
   100% {
     transform: rotate(360deg)
   }
+}
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 #background {
