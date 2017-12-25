@@ -24,12 +24,16 @@ class Premonition extends React.Component {
           display: 'flex'
           // boxShadow: '10px 10px 1000px #000000'
         }}>
-        <img src="images/premonition.jpg" style={{
-          animation: 'x 25s linear',
-          animationName: zoomKeyframes,
-          width: '100%',
-          height: '100%'
-        }} />
+        <img
+          alt="[Here once was an image of Premonition]"
+          src="images/premonition.jpg"
+          style={{
+            animation: 'x 25s linear',
+            animationName: zoomKeyframes,
+            width: '100%',
+            height: '100%'
+          }}
+        />
       </div>
     )
   }

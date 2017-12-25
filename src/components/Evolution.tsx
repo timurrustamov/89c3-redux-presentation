@@ -27,27 +27,27 @@ import 'react-virtualized/styles.css'
 
 interface ChartData {
   name: string
-  value: number
+  downloads: number
 }
 const data2016: ChartData[] = [
-  { name: 'Dec 16', value: 586172 },
-  { name: 'Jan 17', value: 1594072 },
-  { name: 'Feb 17', value: 1667023 },
-  { name: 'Mar 17', value: 2008906 },
-  { name: 'Apr 17', value: 1956369 },
-  { name: 'May 17', value: 2441636 },
-  { name: 'Jun 17', value: 2830761 },
-  { name: 'Jul 17', value: 3024860 },
-  { name: 'Aug 17', value: 3291353 },
-  { name: 'Sep 17', value: 3442214 },
-  { name: 'Oct 17', value: 4110156 },
-  { name: 'Nov 17', value: 4303041 }
+  { name: 'Dec 16', downloads: 586172 },
+  { name: 'Jan 17', downloads: 1594072 },
+  { name: 'Feb 17', downloads: 1667023 },
+  { name: 'Mar 17', downloads: 2008906 },
+  { name: 'Apr 17', downloads: 1956369 },
+  { name: 'May 17', downloads: 2441636 },
+  { name: 'Jun 17', downloads: 2830761 },
+  { name: 'Jul 17', downloads: 3024860 },
+  { name: 'Aug 17', downloads: 3291353 },
+  { name: 'Sep 17', downloads: 3442214 },
+  { name: 'Oct 17', downloads: 4110156 },
+  { name: 'Nov 17', downloads: 4303041 }
 ]
 const dataAll: ChartData[] = [
-  { name: '2014', value: 0 },
-  { name: '2015', value: 695378 },
-  { name: '2016', value: 10603208 },
-  { name: '2017', value: 32933026 }
+  { name: '2014', downloads: 0 },
+  { name: '2015', downloads: 695378 },
+  { name: '2016', downloads: 10603208 },
+  { name: '2017', downloads: 32933026 }
 ]
 
 export type ComponentProps = {
@@ -93,9 +93,9 @@ class Evolution extends React.Component<ComponentProps, ComponentState> {
                 >
                   <CartesianAxis strokeDasharray="3 3" />
                   <XAxis dataKey="name"/>
-                  <YAxis tickFormatter={value => `${value / 1000000}M`} />
-                  <Tooltip formatter={(value: number) => Intl.NumberFormat().format(value)}/>
-                  <Bar fill={step ? '#82CA9D' : '#8884d8'} dataKey="value" />
+                  <YAxis tickFormatter={downloads => `${downloads / 1000000}M`} />
+                  <Tooltip formatter={(downloads: number) => Intl.NumberFormat().format(downloads)}/>
+                  <Bar fill={step ? '#82CA9D' : '#8884d8'} dataKey="downloads" />
                 </BarChart>
               )}
             </AutoSizer>

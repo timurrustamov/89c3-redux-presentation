@@ -89,7 +89,7 @@ export class Welcome extends React.Component<ComponentProps, ComponentState> {
       <div>
         <img
           style={this.styles.image}
-          src="./images/redux-logo.png"
+          src="images/redux-logo.png"
           alt="[Here once was a redux logo]"
         />
         <h1 style={this.styles.text}>

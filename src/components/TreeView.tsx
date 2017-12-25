@@ -18,15 +18,15 @@ export class TreeView extends React.Component<ComponentProps> {
         margin: 'auto',
         transition: 'all 0.5s ease'
       } : {
-        display: 'none'
-      },
+          display: 'none'
+        },
       imageTwo: this.props.step === 1 ? {
         width: '100%',
         margin: 'auto',
         transition: 'all 0.5 ease'
       } : {
-        display: 'none'
-      }
+          display: 'none'
+        }
     }
   }
 
@@ -35,8 +35,14 @@ export class TreeView extends React.Component<ComponentProps> {
     return (
       <div>
         <h4>State</h4>
-        <img style={this.styles.imageOne} src="images/tree-references.png" />
-        <img style={this.styles.imageTwo} src="images/tree-references-2.gif" />
+        <img
+          alt="[Here was once a state tree image]"
+          style={this.styles.imageOne}
+          src="images/tree-references.png" />
+        <img
+          alt="[Here was once a second state tree image]"
+          style={this.styles.imageTwo}
+          src="images/tree-references-2.gif" />
       </div>
     )
   }

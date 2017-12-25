@@ -57,34 +57,33 @@ export class State {
     nationality: 'FRANCAISE',
     ...
   }
-  readonly loading = Readonly<{
+  readonly loading = {
     state: false,
     pendingRequests: 0
-  }>
+  }
   readonly isAuthenticated = false
+  ...
 }
 `
 
 const ActionCode = `
-// create action to add new Todos
+// create action to set user's firstname
 
-export type AddTodo {
-  type: 'TODO_ADD',
-  payload: Todo
+export interface SetFirstname {
+  type: 'USER_SET_FIRSTNAME',
+  payload: string
 }
-export const AddTodo = (todo: Todo): AddTodo => ({
-  type: 'TODO_ADD',
-  payload: todo
-})
+export const SetFirstname =
+  (payload: string): SetFirstname => ({
+    type: 'USER_SET_FIRSTNAME',
+    payload
+  })
 
-const createTodoAction: AddTodo = {
-  type: 'TODO_ADD',
-  payload: {
-    id: 0,
-    name: 'Todo #1',
-    ...
-  }
-}
+// SetFirstname('Jean-Jacques') <==> {
+//   type: 'USER_SET_FIRSTNAME,
+//   payload: 'Jean-Jacques'
+// }
+//
 `
 const ReducerCode = `
 // here goes todo reducer implementation
@@ -92,20 +91,21 @@ const ReducerCode = `
 
 import { combineReducers } from 'redux'
 
-const todosReducer = (state, action) => {
+const userReducer = (user, action) => {
   switch (action.type) {
-    case 'ADD_TODO':
-      return [ ...state, action.payload ]
+    case 'USER_SET_FIRSTNAME':
+      return {
+        ...user,
+        firstname: action.payload
+      }
     default:
       return state
   }
 }
 
 const rootReducer = combineReducers({
-  todos: todosReducer
+  user: userReducer
 })
-
-export default rootReducer
 `
 
 class App extends React.Component {
