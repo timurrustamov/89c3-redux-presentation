@@ -150,7 +150,7 @@ class App extends React.Component {
             </Code>
             <Step backgroundcolor="#2a2f3a" fontcolor="#67a2be">
                 <h4>State</h4>
-                <img width="100%" src="/images/state-example.png" />
+                <img width="100%" src="images/state-example.png" />
             </Step>
             <Step steps={2}>
               <TreeView />
