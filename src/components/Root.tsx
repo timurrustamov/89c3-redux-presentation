@@ -30,7 +30,7 @@ class Root extends React.Component<ComponentProps, ComponentState> {
         height: '100%',
         backgroundColor: this.props.backgroundColor,
         color: this.props.fontColor,
-        transition: 'background-color 0.5s ease 0.5s forward, color 0.5s ease 0.5s forward'
+        transition: 'all ease-in 0.5s'
       }
     }
   }

@@ -10,6 +10,7 @@ import Welcome from './components/Welcome'
 import Evolution from './components/Evolution'
 import FeaturesAnimated from './components/FeaturesAnimated'
 import TreeView from './components/TreeView'
+import Premonition from './components/Premonition'
 
 import store from './store'
 
@@ -39,6 +40,28 @@ function subscribe(listener: Function): Function {
   return () => {
     listeners = listeners.filter(l => l !== listener)
   }
+}
+`
+
+const StateCode = `
+// this state is extracted from [EER] 🛡 project
+
+export class State {
+
+  readonly user: Readonly<{
+    firstname?: string,
+    lastname?: string,
+    nationality: string
+    ...
+  }> = {
+    nationality: 'FRANCAISE',
+    ...
+  }
+  readonly loading = Readonly<{
+    state: false,
+    pendingRequests: 0
+  }>
+  readonly isAuthenticated = false
 }
 `
 
@@ -107,6 +130,8 @@ class App extends React.Component {
             <Step steps={2}>
               <FeaturesAnimated />
             </Step>
+            <Premonition />
+            <h4>Features & APIs</h4>
             <Step fontcolor="#ffffff" backgroundcolor="#1E1F21">
               <h4>Constraints & Contracts</h4>
             </Step>
@@ -119,6 +144,13 @@ class App extends React.Component {
                   'Reducers Appliquent les Changements'
                 ]}
               />
+            </Step>
+            <Code backgroundcolor="#1E1F21">
+              {StateCode}
+            </Code>
+            <Step backgroundcolor="#2a2f3a" fontcolor="#67a2be">
+                <h4>State</h4>
+                <img width="100%" src="/images/state-example.png" />
             </Step>
             <Step steps={2}>
               <TreeView />
