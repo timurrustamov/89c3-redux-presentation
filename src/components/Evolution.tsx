@@ -1,16 +1,5 @@
 import * as React from 'react'
-import { ConnectedActions, mapDispatchToProps } from '../store/actions/connected-actions'
-
-import { Dimensions } from 'react-virtualized/dist/es/AutoSizer'
-import { Col, Row } from 'react-flexbox-grid'
-import { State } from '../store/index';
-import { Dispatch, connect } from 'react-redux';
-import { Action } from 'redux';
-
-import * as Actions from '../store/actions'
-import { bindActionCreators } from 'redux';
-
-import { AutoSizer } from 'react-virtualized'
+import { connect } from 'react-redux';
 import {
   LineChart,
   CartesianGrid,
@@ -22,6 +11,12 @@ import {
   BarChart,
   Bar
 } from 'recharts'
+import { AutoSizer } from 'react-virtualized'
+import { Dimensions } from 'react-virtualized/dist/es/AutoSizer'
+import { Col, Row } from 'react-flexbox-grid'
+
+import { State } from '../store';
+import { ConnectedActions, mapDispatchToProps } from '../store/actions/connected-actions'
 
 import 'react-virtualized/styles.css'
 
@@ -50,9 +45,7 @@ const dataAll: ChartData[] = [
   { name: '2017', downloads: 32933026 }
 ]
 
-export type ComponentProps = {
-  [P in keyof typeof Actions]: (typeof Actions)[P]
-} & {
+export type ComponentProps = ConnectedActions & {
   step: number
 }
 

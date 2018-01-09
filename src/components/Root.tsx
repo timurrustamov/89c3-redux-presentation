@@ -1,8 +1,8 @@
 import * as React from 'react';
-import Media from 'react-media'
+import * as Radium from 'radium'
 import { connect } from 'react-redux';
 import * as Swipeable from 'react-swipeable';
-import * as Radium from 'radium'
+import Media from 'react-media'
 
 import { State } from '../store/index';
 

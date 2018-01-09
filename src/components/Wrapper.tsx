@@ -1,12 +1,13 @@
 import * as React from 'react'
 import * as Radium from 'radium'
-import { Row, Col, Grid } from 'react-flexbox-grid'
 import { connect } from 'react-redux';
-import { ConnectedActions, mapDispatchToProps } from '../store/actions/connected-actions'
+import { Row, Col, Grid } from 'react-flexbox-grid'
 
 import Welcome from './Welcome'
-import { State } from '../store/index';
 import { ComponentProps as StepProps } from './Step';
+
+import { State } from '../store/index';
+import { ConnectedActions, mapDispatchToProps } from '../store/actions/connected-actions'
 
 export type ComponentProps = ConnectedActions & {
   page: number,

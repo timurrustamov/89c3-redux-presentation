@@ -1,13 +1,14 @@
-import * as Actions from '../store/actions';
-import * as React from 'react';
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { bindActionCreators } from 'redux';
-import { Col, Row } from 'react-flexbox-grid';
-import { connect } from 'react-redux';
-import { State } from '../store';
-import { Textfit } from 'react-textfit';
-import { tomorrowNight } from 'react-syntax-highlighter/dist/styles/hljs';
-import Step from './Step';
+import * as React from 'react'
+import { connect } from 'react-redux'
+import SyntaxHighlighter from 'react-syntax-highlighter'
+import { Textfit } from 'react-textfit'
+import { Col, Row } from 'react-flexbox-grid'
+
+import { tomorrowNight } from 'react-syntax-highlighter/dist/styles/hljs'
+
+import Step from './Step'
+
+import { State } from '../store'
 import { ConnectedActions, mapDispatchToProps } from '../store/actions/connected-actions'
 
 export type ComponentProps = ConnectedActions & { step: number } & {
@@ -55,6 +56,7 @@ export class Code extends React.Component<ComponentProps, {}> {
             customStyle={{
               width: '100%',
               opacity: 0.01,
+              maxWidth: '87vw',
               textAlign: 'left',
               animation: 'fadein 0.5s ease 0.5s forwards'
             }}

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { connect } from 'react-redux';
-import { State } from '../store/index';
+import { State } from '../store';
 
 export type ComponentProps = {
   step: number

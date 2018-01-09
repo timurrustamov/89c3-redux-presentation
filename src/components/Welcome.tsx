@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as Radium from 'radium'
 import { connect } from 'react-redux'
 
-import { State } from '../store/index'
+import { State } from '../store'
 import { ConnectedActions, mapDispatchToProps } from '../store/actions/connected-actions'
 
 const labels = ['89C3', 'BPCE', 'Redux']
