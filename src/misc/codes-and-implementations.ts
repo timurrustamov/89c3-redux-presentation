@@ -7,10 +7,7 @@ let state = undefined
 
 function dispatch<T>(action: T): T {
   const newState = reducer(state, action)
-  if (state !== newState) {
-    state = newState
-    listeners.slice().forEach(l => l())
-  }
+  listeners.slice().forEach(l => l())
   return action
 }
 
