@@ -3,7 +3,7 @@ import * as Radium from 'radium'
 
 const shadowKeyframes = Radium.keyframes({
   '0%': { transform: '0 0 0 #fff'},
-  '100%': { boxShadow: '10px 10px 1000px #000000'}
+  '100%': { boxShadow: '100px 100px 100px #a0a0a0'}
 })
 
 class Premonition extends React.Component {

@@ -13,7 +13,7 @@ import { ConnectedActions, mapDispatchToProps } from '../store/actions/connected
 
 export type ComponentProps = ConnectedActions & { step: number } & {
   children: any
-  backgroundcolor: string,
+  backgroundcolor?: string,
   highlightedLines?: (null | number[])[]
 }
 
@@ -36,6 +36,8 @@ export class Code extends React.Component<ComponentProps, {}> {
 
   componentWillMount() {
     this.props.StepsTotal({ totalSteps: (this.props.highlightedLines || []).length || 1 })
+    if (!this.props.backgroundcolor)
+      this.props.SetBackground({ backgroundColor: '#1E1F21'})
   }
 
   render() {

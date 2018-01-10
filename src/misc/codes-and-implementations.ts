@@ -6,8 +6,11 @@ let listeners: Function[] = []
 let state = undefined
 
 function dispatch<T>(action: T): T {
-  state = reducer(state, action)
-  listeners.slice().forEach(l => l())
+  const newState = reducer(state, action)
+  if (state !== newState) {
+    state = newState
+    listeners.slice().forEach(l => l())
+  }
   return action
 }
 
@@ -65,11 +68,25 @@ export const SetFirstname =
 // }
 //
 `
-export const Reducer = `
-// here goes todo reducer implementation
-// sorry for javascript! 🙈
 
-import { combineReducers } from 'redux'
+export const TrixAction = `
+// reduce boilerplate
+
+export interface SetData {
+  type: 'USER_SET_DATA',
+  payload: Partial<User>
+}
+export const SetData =
+  (payload: SetData['payload']): SetData => ({
+    type: 'USER_SET_DATA',
+    payload
+  })
+
+// SetData({ firstname: 'Jean', lastname: 'Jacques' })
+`
+
+export const Reducer = `
+// sorry for javascript! 🙈
 
 const userReducer = (user, action) => {
   switch (action.type) {
@@ -78,19 +95,122 @@ const userReducer = (user, action) => {
         ...user,
         firstname: action.payload
       }
+    case 'USER_SET_DATA':
     default:
       return state
   }
 }
 
-const rootReducer = combineReducers({
-  user: userReducer
+export default userReducer
+`
+
+export const ComposableReducer = `
+// composable reducers
+
+const addressReducer = (adress, action) => { ... }
+
+const userReducer = (user, action) => {
+  switch (action.type) {
+    case 'USER_SET_CITY':
+    case 'USER_SET_STREET_NAME':
+    case 'USER_SET_ZIPCODE':
+      return {
+        ...user,
+        adress: addressReducer(user.address, action)
+      }
+    ...
+  }
+}
+
+export default userReducer
+`
+
+export const CombineReducers = `
+// combine those reducers into a root reducer
+
+import { combineReducers } from 'redux'
+
+export default combineReducers({
+  user: userReducer,
+  router: routerReducer,
+  ...
 })
 `
 
-export default {
-  Reducer,
-  State,
-  Action,
-  Redux
+export const Reselect = `
+// memoize does some memoization :P
+
+@memoize()
+const getVisibleTodos = (todos, filter) => {
+  switch (filter) {
+    case 'SHOW_ALL':
+      return todos
+    case 'SHOW_COMPLETED':
+      return todos.filter(t => t.completed)
+    case 'SHOW_ACTIVE':
+      return todos.filter(t => !t.completed)
+  }
 }
+`
+
+export const Undoable = `
+const undoable = (reducer) => {
+  // call the reducer with empty action to populate the initial state
+  const initialState = {
+    past: [],
+    present: reducer(undefined, {})
+  }
+  // return a reducer that handles undo
+  return (state = initialState, action) => {
+    const { past, present, future } = state
+    if (action.type === 'UNDO') {
+      return {
+        past: past.slice(0, -1),
+        present: past[past.length - 1]
+      }
+    }
+    return {
+      past: [ ...past, present ],
+      present: reducer(present, action)
+    }
+  }
+}
+`
+
+export const Middleware = `
+const logger = state => next => action => {
+  console.log('Previous state', state)
+  const nextState = next(action)
+  console.log('With action', action)
+  console.log('Is new state', nextState)
+  return nextState
+}
+
+const appendMeta = state => next => action => (
+  next({
+    ...action,
+    meta: action.meta || { data: 'myMetadata }
+  })
+)
+`
+
+export const React = `
+import * as React from 'react'
+import { bindActionCreators } from 'redux'
+
+export type ComponentProps = { counter: number }
+
+class App extends React.Component<ComponentProps> {
+
+  state = reducer(undefined, {})
+  actions = bindActionCreators(actions, this.dispatch)
+
+  dispatch = (action) => {
+    this.setState(state => reducer(state, action))
+  }
+
+  render() {
+    return <MyComponent { ...this.state } { ...this.actions } />
+  }
+}
+`

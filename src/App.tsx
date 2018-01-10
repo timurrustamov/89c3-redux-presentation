@@ -15,8 +15,10 @@ import FeaturesAnimated from './components/FeaturesAnimated'
 import Premonition from './components/Premonition'
 import TreeView from './components/TreeView'
 import State from './components/State'
+import Library from './components/Library'
+import Chapter from './components/Chapter'
 
-import Impl from './misc/codes-and-implementations'
+import * as Impl from './misc/codes-and-implementations'
 
 class App extends React.Component {
   render() {
@@ -39,7 +41,6 @@ class App extends React.Component {
             </Code>
             <Step steps={2}><FeaturesAnimated/></Step>
             <Premonition/>
-            <h4>Features & APIs</h4>
             <Step fontcolor="#fff" backgroundcolor="#1E1F21">
               <h4>Constraints & Contracts</h4>
             </Step>
@@ -52,61 +53,11 @@ class App extends React.Component {
                   'Reducers Appliquent les Changements'
                 ]}/>
             </Step>
-            <Code backgroundcolor="#1E1F21">
-              {Impl.State}
-            </Code>
+            <Code backgroundcolor="#1E1F21">{Impl.State}</Code>
             <Step backgroundcolor="#2a2f3a" fontcolor="#67a2be">
               <State />
             </Step>
-            <Step>
-              <TreeView/>
-            </Step>
-            <Step backgroundcolor="#1E1F21" fontcolor="#fff">
-                <List
-                  title="Tout est POJO"
-                  points={[
-                    'Persistance',
-                    'Rendering universel',
-                    'Time travel',
-                    'Mutations optimistes',
-                    'Network-enabled par defaut'
-                  ]}
-                />
-            </Step>
-            <Step fontcolor="#fff" backgroundcolor="#1E1F21">
-              <List
-                title="Redux Contracts"
-                points={['Actions', 'Reducers', 'Selectors', 'Middleware']}/>
-            </Step>
-            <Step fontcolor="#fff" backgroundcolor="#1E1F21">
-              <h4>Actions</h4>
-              <h5
-                style={{
-                color: '#aaaaaa',
-                fontWeight: 200
-              }}>
-                {`type Action<T> = {
-                type: string,
-                payload: T
-              }`}
-              </h5>
-            </Step>
-            <Code backgroundcolor="#1E1F21">
-              {Impl.Action}
-            </Code>
-            <Step fontcolor="#fff" backgroundcolor="#1E1F21">
-              <h4>Reducers</h4>
-              <h5
-                style={{
-                color: '#aaaaaa',
-                fontWeight: 200
-              }}>
-                {`(state: State, action: Action) => State`}
-              </h5>
-            </Step>
-            <Code backgroundcolor="#1E1F21">
-              {Impl.Reducer}
-            </Code>
+            <TreeView />
             <Step fontcolor="#fff" backgroundcolor="#1E1F21">
               <List
                 title="Debug Workflow"
@@ -118,6 +69,66 @@ class App extends React.Component {
                   'Ecrire un Test'
                 ]}/>
             </Step>
+            <Step backgroundcolor="#1E1F21" fontcolor="#fff">
+              <List
+                title="Tout est POJO"
+                points={[
+                  'Persistance',
+                  'Rendering universel',
+                  'Mutations optimistes',
+                  'Network-enabled par defaut'
+                ]}
+              />
+            </Step>
+            <Step fontcolor="#fff" backgroundcolor="#1E1F21">
+              <List
+                title="Redux Contracts"
+                points={['Actions', 'Reducers', 'Selectors', 'Middleware']}/>
+            </Step>
+            <Step fontcolor="#fff" backgroundcolor="#1E1F21">            
+              <Chapter title="Actions" subtitle={`type Action<T> = {
+                  type: string,
+                  payload: T
+                }`}/>
+            </Step>
+            <Code backgroundcolor="#1E1F21">{Impl.Action}</Code>
+            <Code backgroundcolor="#1E1F21">{Impl.TrixAction}</Code>
+            <Library icon="🕶" iconStyle={{ fontSize: '3em', paddingBottom: 0 }} name="ngrx/store"/>            
+            <Step fontcolor="#fff" backgroundcolor="#1E1F21">
+              <Chapter title="Reducers" subtitle={`(state: State, action: Action) => State`} />
+            </Step>
+            <Code backgroundcolor="#1E1F21">{Impl.Reducer}</Code>
+            <Code backgroundcolor="#1E1F21">{Impl.ComposableReducer}</Code>
+            <Code backgroundcolor="#1E1F21">{Impl.CombineReducers}</Code>
+            <Step fontcolor="#fff" backgroundcolor="#1E1F21">
+              <Chapter title="Selectors" subtitle={`(state, ...args) => derivation`} />
+            </Step>
+            <Code backgroundcolor="#1E1F21">{Impl.Reselect}</Code>
+            <Library icon="🍬" name="reactjs/reselect" />
+            <Step fontcolor="#fff" backgroundcolor="#1E1F21">
+              <Chapter title="Higher Order Reducers" subtitle={`(reducer, ...args) => reducer`} />
+            </Step>
+            <Code backgroundcolor="#1E1F21">{Impl.Undoable}</Code>
+            <Library icon="🖋" name="davidkpiano/react-redux-form" />
+            <Step fontcolor="#fff" backgroundcolor="#1E1F21">
+              <Chapter title="Middleware" subtitle={`store => next => action => any`} />
+            </Step>
+            <Code backgroundcolor="#1E1F21">{Impl.Middleware}</Code>
+            <Library icon="💾" name="elgerlambert/redux-localstorage" />
+            <Library icon="🔎" name="redux-observable/redux-observable" />
+            <Library icon="☕" name="zalmoxisus/redux-devtools-extension" />
+            <h3>Meme sans Redux, le pattern est la!</h3>
+            <Code backgroundcolor="#1E1F21">{Impl.React}</Code>
+            <div>
+              <h3>Pourquoi Redux?</h3>
+              <ul style={{ fontSize: '0.7em', listStyleType: 'none'}}>
+                <li>Declaratif</li>
+                <li>Facile a comprendre et a maitriser</li>
+                <li>Pas de galere pour tester</li>
+                <li>Peut combiner de la data locale et distante</li>
+                <li>Une experience de dev :)</li>
+              </ul>
+            </div>
           </Root>
         </Provider>
       </Radium.StyleRoot>

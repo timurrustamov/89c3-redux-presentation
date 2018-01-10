@@ -19,7 +19,7 @@ function navigation(
           ...state,
           step: 0,
           totalSteps: 0,
-          page: state.page + 1 >= state.totalPages ? 0 : state.page + 1
+          page: state.page + 1 >= state.totalPages ? state.page : state.page + 1
         }
       return {
         ...state,
