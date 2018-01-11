@@ -114,7 +114,6 @@ class App extends React.Component {
             </Step>
             <Code backgroundcolor="#1E1F21">{Impl.Reselect}</Code>
             <Library icon="🍬" name="reactjs/reselect" />
-            <Library icon="🛡" name="angular-redux/store" />
             <Step fontcolor="#fff" backgroundcolor="#1E1F21">
               <Chapter title="Higher Order Reducers" subtitle={`(reducer, ...args) => reducer`} />
             </Step>
