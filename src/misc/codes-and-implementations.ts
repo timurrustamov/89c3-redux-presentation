@@ -186,7 +186,7 @@ const logger = state => next => action => {
 const appendMeta = state => next => action => (
   next({
     ...action,
-    meta: action.meta || { data: 'myMetadata }
+    meta: action.meta || { data: 'myMetadata' }
   })
 )
 `

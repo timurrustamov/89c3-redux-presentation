@@ -17,6 +17,7 @@ import TreeView from './components/TreeView'
 import State from './components/State'
 import Library from './components/Library'
 import Chapter from './components/Chapter'
+import History from './components/History'
 
 import * as Impl from './misc/codes-and-implementations'
 
@@ -28,6 +29,9 @@ class App extends React.Component {
           <Root defaultFontColor="#1E1F21" defaultBackgroundColor="#fff">
             <Step steps={2}>
               <Welcome/>
+            </Step>
+            <Step steps={5}>
+              <History />
             </Step>
             <Step steps={2} clickable>
               <Evolution/>
@@ -48,9 +52,9 @@ class App extends React.Component {
               <List
                 title="Redux Constraints"
                 points={[
-                  'State Unique et Immutable',
-                  'Actions Décrivent les Changements',
-                  'Reducers Appliquent les Changements'
+                  'State unique et immutable',
+                  'Actions décrivent les changements',
+                  'Reducers appliquent les changements'
                 ]}/>
             </Step>
             <Code backgroundcolor="#1E1F21">{Impl.State}</Code>
@@ -58,21 +62,15 @@ class App extends React.Component {
               <State />
             </Step>
             <TreeView />
-            <div>
-              <img
-                alt="[Here was once a schema image]"
-                style={{ height: '7em' }}
-                src="images/redux-schema.gif" />
-            </div>
             <Step fontcolor="#fff" backgroundcolor="#1E1F21">
               <List
                 title="Debug Workflow"
                 points={[
                   'Log des Actions et du State',
-                  'Trouver le State Défaillant',
+                  'Trouver le State défaillant',
                   'Verifier l\'Action',
                   'Patcher le Reducer',
-                  'Ecrire un Test'
+                  'Écrire un test'
                 ]}/>
             </Step>
             <Step backgroundcolor="#1E1F21" fontcolor="#fff">
@@ -91,7 +89,13 @@ class App extends React.Component {
                 title="Redux Contracts"
                 points={['Actions', 'Reducers', 'Selectors', 'Middleware']}/>
             </Step>
-            <Step fontcolor="#fff" backgroundcolor="#1E1F21">            
+            <div>
+              <img
+                alt="[Here was once a schema image]"
+                style={{ height: '7em' }}
+                src="images/redux-schema.gif" />
+            </div>
+            <Step fontcolor="#fff" backgroundcolor="#1E1F21">
               <Chapter title="Actions" subtitle={`type Action<T> = {
                   type: string,
                   payload: T
@@ -99,7 +103,6 @@ class App extends React.Component {
             </Step>
             <Code backgroundcolor="#1E1F21">{Impl.Action}</Code>
             <Code backgroundcolor="#1E1F21">{Impl.TrixAction}</Code>
-            <Library icon="🕶" iconStyle={{ fontSize: '3em', paddingBottom: 0 }} name="ngrx/store"/>            
             <Step fontcolor="#fff" backgroundcolor="#1E1F21">
               <Chapter title="Reducers" subtitle={`(state: State, action: Action) => State`} />
             </Step>
@@ -124,18 +127,36 @@ class App extends React.Component {
             <Library icon="💾" name="elgerlambert/redux-localstorage" />
             <Library icon="🔎" name="redux-observable/redux-observable" />
             <Library icon="☕" name="zalmoxisus/redux-devtools-extension" />
-            <h3>Meme sans Redux, le pattern est la!</h3>
+            <Step fontcolor="#fff" backgroundcolor="#1E1F21">
+              <h3>Les connecteurs</h3>
+            </Step>
+            <Library icon="🕶" name="ngrx/store"/>
+            <Library icon="🛡" name="angular-redux/store" />
+            <Library icon="⚙️" name="reactjs/react-redux" />
+            <Step fontcolor="#fff" backgroundcolor="#1E1F21">
+              <h3>Le pattern</h3>
+            </Step>
             <Code backgroundcolor="#1E1F21">{Impl.React}</Code>
             <div>
-              <h3>Pourquoi Redux?</h3>
-              <ul style={{ fontSize: '0.7em', listStyleType: 'none'}}>
-                <li>Declaratif</li>
-                <li>Facile a comprendre et a maitriser</li>
-                <li>Pas de galere pour tester</li>
+              <h3 style={{ color: '#7453A9' }}>Redux</h3>
+              <ul style={{ padding: 0, fontSize: '0.7em', listStyleType: 'none'}}>
+                <li>Déclaratif</li>
+                <li>Facile a comprendre et a maîtriser</li>
+                <li>Pas de galère pour tester</li>
                 <li>Peut combiner de la data locale et distante</li>
-                <li>Une experience de dev :)</li>
+                <li>Une expérience de dev :)</li>
               </ul>
             </div>
+            <Step fontcolor="#fff" backgroundcolor="#1E1F21">
+              <h3>Des vraies libraries</h3>
+            </Step>
+            <Library icon="♻️" name="ReactiveX/rxjs"/>
+            <Library icon="📦" name="mobxjs/mobx"/>
+            <Library icon="👨‍🎓" name="cerebral/cerebral"/>
+            <Step fontcolor="#7453A9">
+              <h2>Merci</h2>
+              <h3>Questions ?</h3>
+            </Step>
           </Root>
         </Provider>
       </Radium.StyleRoot>

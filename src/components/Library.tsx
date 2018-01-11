@@ -6,13 +6,13 @@ import { Col, Row } from 'react-flexbox-grid'
 import { State } from '../store'
 import { ConnectedActions, mapDispatchToProps } from '../store/actions/connected-actions'
 
-export type ComponentProps = ConnectedActions & { step: number } & {
+export type ComponentProps = {
   icon: string,
   name: string,
   iconStyle?: React.CSSProperties
 }
 
-const Library = (props: ComponentProps) => (
+export default (props: ComponentProps) => (
 
   <Row>
     <Col
@@ -25,9 +25,9 @@ const Library = (props: ComponentProps) => (
       <div
         style={{
           textAlign: 'center',
-          fontSize: '2em',
           paddingBottom: '0.5em',
-          ...(props.iconStyle || {})
+          ...(props.iconStyle || {}),
+          fontSize: '125px'
         }}>
         {props.icon}
       </div>
@@ -42,5 +42,3 @@ const Library = (props: ComponentProps) => (
     </Col>
   </Row>
 )
-
-export default connect((state: State) => ({ step:  state.navigation.step }), mapDispatchToProps)(Library)
