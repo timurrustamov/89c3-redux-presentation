@@ -58,6 +58,12 @@ class App extends React.Component {
               <State />
             </Step>
             <TreeView />
+            <div>
+              <img
+                alt="[Here was once a schema image]"
+                style={{ height: '7em' }}
+                src="images/redux-schema.gif" />
+            </div>
             <Step fontcolor="#fff" backgroundcolor="#1E1F21">
               <List
                 title="Debug Workflow"
@@ -104,8 +110,8 @@ class App extends React.Component {
               <Chapter title="Selectors" subtitle={`(state, ...args) => derivation`} />
             </Step>
             <Code backgroundcolor="#1E1F21">{Impl.Reselect}</Code>
-            <Library icon="🛡" name="angular-redux/store" />
             <Library icon="🍬" name="reactjs/reselect" />
+            <Library icon="🛡" name="angular-redux/store" />
             <Step fontcolor="#fff" backgroundcolor="#1E1F21">
               <Chapter title="Higher Order Reducers" subtitle={`(reducer, ...args) => reducer`} />
             </Step>
