@@ -1,10 +1,23 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 
+import * as Radium from 'radium'
+
 import { Col, Row } from 'react-flexbox-grid'
 
 import { State } from '../store'
 import { ConnectedActions, mapDispatchToProps } from '../store/actions/connected-actions'
+
+const styles = {
+  icon: {
+    '@media (min-width: 578px)': {
+      fontSize: '125px'
+    },
+    '@media (max-width: 577px)': {
+      fontSize: '2em'
+    }
+  }
+}
 
 export type ComponentProps = {
   icon: string,
@@ -12,7 +25,7 @@ export type ComponentProps = {
   iconStyle?: React.CSSProperties
 }
 
-export default (props: ComponentProps) => (
+export default Radium((props: ComponentProps) => (
 
   <Row>
     <Col
@@ -27,7 +40,7 @@ export default (props: ComponentProps) => (
           textAlign: 'center',
           paddingBottom: '0.5em',
           ...(props.iconStyle || {}),
-          fontSize: '125px'
+          ...styles.icon
         }}>
         {props.icon}
       </div>
@@ -41,4 +54,4 @@ export default (props: ComponentProps) => (
       </div>
     </Col>
   </Row>
-)
+))
